@@ -4,7 +4,7 @@
 class Review
 {
     public $id;
-    public $name;
+    public $user_id;
     public $title;
     public $text;
     public $rating;
@@ -13,5 +13,7 @@ class Review
     public function __construct()
     {
         settype($this->id, 'integer');
+        settype($this->user_id, 'integer');
+        settype($this->product_id, 'integer');
     }
 }

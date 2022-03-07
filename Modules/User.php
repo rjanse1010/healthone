@@ -29,3 +29,25 @@ function getUserById($userId) {
 	$result = $query->fetchAll(PDO::FETCH_CLASS, "User")[0];
 	return $result;
 }
+
+function userIsLoggedIn() {
+	return isset($_SESSION['user_id']);
+}
+
+function userIsAdmin($userId) {
+	return (getUserById($userId)->is_admin)==1?true:false;
+}
+
+function editProfile($userId, $newUsername, $newPassword) {
+	try {
+		global $pdo;
+		$query = $pdo->prepare("UPDATE users SET username = :username, password = :password WHERE id = :userid");
+		$query->bindParam("username", $newUsername);
+		$query->bindParam("password", $newPassword);
+		$query->bindParam("userid", $userId);
+		$query->execute();
+		$query->debugDumpParams();
+	} catch(Exception $e) {
+		echo $e;
+	}
+}

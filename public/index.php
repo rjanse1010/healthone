@@ -12,6 +12,9 @@ $title = "HealthOne";
 $titleSuffix = "";
 
 session_start();
+if(userIsLoggedIn()) {
+    $currentUser = getUserById($_SESSION["user_id"]);
+}
 
 switch ($params[1]) {
     case 'categories':
@@ -68,8 +71,13 @@ switch ($params[1]) {
         include_once "../Templates/contact.php";
 		break;
     case 'member':
-        $titleSuffix = ' | Memberpagina';
-        include_once "../Templates/member.php";
+        if(count($params) >= 3 && $params[2] == 'edit') {
+            $titleSuffix = ' | Memberpagina bewerken';
+            include_once "../Templates/memberedit.php";
+        } else {
+            $titleSuffix = ' | Memberpagina';
+            include_once "../Templates/member.php";
+        }
         break;
 	case 'login':
 		$titleSuffix = ' | Inloggen';

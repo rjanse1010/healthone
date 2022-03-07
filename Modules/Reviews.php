@@ -13,11 +13,11 @@ function getReviews($productId)
 	return $result;
 }
 
-function saveReview($name, $title, $text, int $rating, int $product_id) {
+function saveReview($user_id, $title, $text, $rating, $product_id) {
 	global $pdo;
 	if($rating >= 1 && $rating <= 5) {
-		$query = $pdo->prepare("INSERT INTO reviews (name, title, text, rating, product_id) VALUES (:name, :title, :text, :rating, :product_id)");
-		$query->bindParam("name", $name);
+		$query = $pdo->prepare("INSERT INTO reviews (user_id, title, text, rating, product_id) VALUES (:user_id, :title, :text, :rating, :product_id)");
+		$query->bindParam("user_id", $user_id);
 		$query->bindParam("title", $title);
 		$query->bindParam("text", $text);
 		$query->bindParam("rating", $rating, PDO::PARAM_INT);

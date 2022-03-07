@@ -16,21 +16,18 @@
                 if($validated) {
                     $_SESSION['user_id'] = $validated;
                 } else {
-                    echo "Foute invoer";
+                    echo "<span class='text-danger'>De ingevoerde gebruikersnaam en/of het wachtwoord kloppen niet</span>";
                 }
                 // }
             }
 
-            // Use session variables
-            //$_SESSION['userid'] = 1;
 
-            // E.g. find if the user is logged in
-            if(isset($_SESSION['user_id'])) {
+            if(userIsLoggedIn()) {
                 header('Location: /member');
             }
             ?>
 			
-            <form id="reviewform" method="post">
+            <form id="loginform" method="post">
                 <div class="form-head"><h3>Login</h3></div>
                 <?php 
                 if(isset($_SESSION["errorMessage"])) {
@@ -50,16 +47,7 @@
                 </div>
                 <button type="submit" name="submit" class="btn btn-primary">Login</button>
             </form>
-            
-            <?php
-             //session_start(); 
-            if(isset($_POST["password"])) {
-                //alert("");
-                echo $_POST["username"] . "<br>";
-                echo $_POST["password"];
-            }
-			
-            ?>
+
             <p>TEST</p>
             <?php
             include_once ('defaults/footer.php');

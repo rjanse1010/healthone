@@ -17,15 +17,6 @@
 			<p>We zijn momenteel te bereiken via info@healthone.com. Tevens zijn we telefonisch bereikbaar via 015-2578924.</p>
 			
 			<h4>Openingstijden</h4>
-            <!-- <ul class="list-group ">
-			  <li class="list-group-item d-flex justify-content-between align-items-center">Maandag <span class="badge bg-success rounded-pill">Geopend van 07:00u tot 20:00u</span></li>
-			  <li class="list-group-item d-flex justify-content-between align-items-center">Dinsdag <span class="badge bg-success rounded-pill">Geopend van 08:00u tot 20:00u</span></li>
-			  <li class="list-group-item d-flex justify-content-between align-items-center">Woensdag <span class="badge bg-success rounded-pill">Geopend van 07:00u tot 20:00u</span></li>
-			  <li class="list-group-item d-flex justify-content-between align-items-center">Donderdag <span class="badge bg-success rounded-pill">Geopend van 08:00u tot 20:00u</span></li>
-			  <li class="list-group-item d-flex justify-content-between align-items-center">Vrijdag <span class="badge bg-success rounded-pill">Geopend van 07:00u tot 20:30u</span></li>
-			  <li class="list-group-item d-flex justify-content-between align-items-center">Zaterdag <span class="badge bg-success rounded-pill">Geopend van 08:00u tot 13:00u</span></li>
-			  <li class="list-group-item rounded-0 d-flex justify-content-between align-items-center">Zondag <span class="badge bg-success rounded-pill">Geopend van 08:00u tot 13:00u</span></li>
-			</ul> -->
 
             <ul class="list-group ">
                 <?php

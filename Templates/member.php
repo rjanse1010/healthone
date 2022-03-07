@@ -1,7 +1,7 @@
 <!DOCTYPE html>
     <html>
     <?php
-    if(!isset($_SESSION["user_id"])) {
+    if(!userIsLoggedIn()) {
         header("Location: /login");
     }
     
@@ -17,11 +17,13 @@
 
             <h4>Member</h4>
             <?php
-                $currentUser = getUserById($_SESSION["user_id"]);
+                global $currentUser;
                 echo "Je bent ingelogd als: " . $currentUser->username;
                 echo "<br>Je bent " . ($currentUser->is_admin?"admin":"reguliere gebruiker");
 
             ?>
+            <br>
+            <a href="/member/edit" class="btn btn-primary">Profiel bewerken</a>
             <hr>
             <?php
             include_once ('defaults/footer.php');
