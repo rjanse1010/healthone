@@ -3,7 +3,7 @@
 include_once('../Classes/Review.php');
 include_once('Database.php');
 // TODO Zorg dat de methodes goed ingevuld worden met de juiste queries.
-function getReviews($productId)
+function getReviews(int $productId)
 {
 	global $pdo;
 	$query = $pdo->prepare("SELECT * FROM reviews WHERE product_id = ?");
@@ -13,20 +13,20 @@ function getReviews($productId)
 	return $result;
 }
 
-function saveReview($user_id, $title, $text, $rating, $product_id) {
+function saveReview(int $userId, $title, $text, $rating, $productId) {
 	global $pdo;
 	if($rating >= 1 && $rating <= 5) {
 		$query = $pdo->prepare("INSERT INTO reviews (user_id, title, text, rating, product_id) VALUES (:user_id, :title, :text, :rating, :product_id)");
-		$query->bindParam("user_id", $user_id);
+		$query->bindParam("user_id", $userId);
 		$query->bindParam("title", $title);
 		$query->bindParam("text", $text);
 		$query->bindParam("rating", $rating, PDO::PARAM_INT);
-		$query->bindParam("product_id", $product_id, PDO::PARAM_INT);
+		$query->bindParam("product_id", $productId, PDO::PARAM_INT);
 		$query->execute();
 	}
 }
 
-function getAverageRating($productId) { //Verkrijg de gemiddelde beoordeling afgerond op .5
+function getAverageRating(int $productId) { //Verkrijg de gemiddelde beoordeling afgerond op .5
 	$reviews = getReviews($productId);
 	if($reviews == null) {
 		return null;

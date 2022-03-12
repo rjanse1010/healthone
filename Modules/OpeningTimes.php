@@ -12,15 +12,24 @@ function getTimes()
 	return $result;
 }
 
-// function saveReview($name, $title, $text, int $rating, int $product_id) {
-// 	global $pdo;
-// 	if($rating >= 1 && $rating <= 5) {
-// 		$query = $pdo->prepare("INSERT INTO reviews (name, title, text, rating, product_id) VALUES (:name, :title, :text, :rating, :product_id)");
-// 		$query->bindParam("name", $name);
-// 		$query->bindParam("title", $title);
-// 		$query->bindParam("text", $text);
-// 		$query->bindParam("rating", $rating, PDO::PARAM_INT);
-// 		$query->bindParam("product_id", $product_id, PDO::PARAM_INT);
-// 		$query->execute();
-// 	}
-// }
+function getDay(int $dayId)
+{
+    global $pdo;
+	$query = $pdo->prepare("SELECT * FROM openingtimes WHERE id = ?");
+	$query->bindParam(1,$dayId);
+	$query->execute();
+	$result = $query->fetchAll(PDO::FETCH_CLASS, "OpeningTimes");
+	if(count($result) >= 1) {
+		return $result[0];
+	}
+	return null;
+}
+
+function saveDay(int $dayId, $newOpening, $newClosing) {
+	global $pdo;
+	$query = $pdo->prepare("UPDATE openingtimes SET time_open = :opening, time_close = :closing WHERE id = :day_id");
+	$query->bindParam("opening", $newOpening);
+	$query->bindParam("closing", $newClosing);
+	$query->bindParam("day_id", $dayId);
+	$query->execute();
+}

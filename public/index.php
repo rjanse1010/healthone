@@ -73,10 +73,29 @@ switch ($params[1]) {
     case 'member':
         if(count($params) >= 3 && $params[2] == 'edit') {
             $titleSuffix = ' | Memberpagina bewerken';
-            include_once "../Templates/memberedit.php";
+            include_once "../Templates/member_edit.php";
         } else {
             $titleSuffix = ' | Memberpagina';
             include_once "../Templates/member.php";
+        }
+        break;
+    case 'admin':
+        if(count($params) >= 3 && $params[2] == 'products') {
+            $titleSuffix = ' | Adminpaneel: Sportapparaten';
+            include_once "../Templates/admin_products.php";
+        } else if(count($params) >= 3 && $params[2] == 'contact') {
+            if(count($params) >= 5 && $params[3] == 'edit') { //Als de admin een dag wil bewerken
+                $dayId = intval($_GET["day_id"]); //Voorkom iets anders dan int in de url
+                $day = getDay($dayId);
+                $titleSuffix = ' | Adminpaneel: Contact bewerken';
+                include_once "../Templates/admin_contact_edit.php";
+            } else {
+                $titleSuffix = ' | Adminpaneel: Contact';
+                include_once "../Templates/admin_contact.php";
+            }
+        } else {
+            $titleSuffix = ' | Adminpaneel';
+            include_once "../Templates/admin.php";
         }
         break;
 	case 'login':

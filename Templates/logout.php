@@ -11,7 +11,11 @@
             include_once ('defaults/pictures.php');
 
             unset($_SESSION["user_id"]);
-            header("Location: /login");
+            if(isset($_SERVER['HTTP_REFERER'])) {
+                header('Location: '.$_SERVER['HTTP_REFERER']);  
+            } else {
+                header('Location: /login');  
+            }
 
             include_once ('defaults/footer.php');
             ?>
