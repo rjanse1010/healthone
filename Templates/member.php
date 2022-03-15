@@ -23,7 +23,7 @@
 
                 if($currentUser->is_admin):?>
                     <br>
-                    <a href="/admin" class="btn btn-primary">CRUD-paneel</a>
+                    <a href="/admin" class="btn btn-primary">Adminpaneel</a>
                     <br>
                 <?php endif;
             ?>

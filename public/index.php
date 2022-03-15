@@ -81,8 +81,24 @@ switch ($params[1]) {
         break;
     case 'admin':
         if(count($params) >= 3 && $params[2] == 'products') {
-            $titleSuffix = ' | Adminpaneel: Sportapparaten';
-            include_once "../Templates/admin_products.php";
+            if(count($params) >= 4 && $params[3] == 'add') {
+                $titleSuffix = ' | Adminpaneel: Sportapparaat toevoegen';
+                include_once "../Templates/admin_products_add.php";
+            } else if(count($params) >= 5 && $params[3] == 'edit') {
+                $productId = $_GET['product_id'];
+                $product = getProduct($productId);
+                $titleSuffix = ' | Adminpaneel: Sportapparaat bewerken';
+                include_once "../Templates/admin_products_edit.php";
+            } else if(count($params) >= 5 && $params[3] == 'delete') {
+                $productId = $_GET['product_id'];
+                $product = getProduct($productId);
+                $titleSuffix = ' | Adminpaneel: Sportapparaat verwijderen';
+                include_once "../Templates/admin_products_delete.php";
+            } else {
+                $products = getAllProducts();
+                $titleSuffix = ' | Adminpaneel: Sportapparaten';
+                include_once "../Templates/admin_products.php";
+            }
         } else if(count($params) >= 3 && $params[2] == 'contact') {
             if(count($params) >= 5 && $params[3] == 'edit') { //Als de admin een dag wil bewerken
                 $dayId = intval($_GET["day_id"]); //Voorkom iets anders dan int in de url
@@ -91,7 +107,7 @@ switch ($params[1]) {
                 include_once "../Templates/admin_contact_edit.php";
             } else {
                 $titleSuffix = ' | Adminpaneel: Contact';
-                include_once "../Templates/admin_contact.php";
+                include_once "../Templates/admin_contact.php"; 
             }
         } else {
             $titleSuffix = ' | Adminpaneel';

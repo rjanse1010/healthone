@@ -19,7 +19,7 @@
             if(isset($_POST["submit"])) {
                 editProfile($_SESSION["user_id"], $_POST["username"], $_POST["password"]);
                 $currentUser = getUserById($_SESSION["user_id"]);
-                echo "<p>Gegevens succesvol gewijzigd</p>";
+                echo "<div class='alert alert-success' role='alert'>Gegevens succesvol gewijzigd!</div>";
             }
             ?>
 

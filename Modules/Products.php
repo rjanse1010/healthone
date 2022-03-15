@@ -14,6 +14,15 @@ function getProducts(int $categoryId)
 	return $result;
 }
 
+function getAllProducts()
+{
+    global $pdo;
+	$query = $pdo->prepare("SELECT * FROM products");
+	$query->execute();
+	$result = $query->fetchAll(PDO::FETCH_CLASS, "Product");
+	return $result;
+}
+
 function getProduct(int $productId)
 {
     global $pdo;
@@ -22,4 +31,11 @@ function getProduct(int $productId)
 	$query->execute();
 	$result = $query->fetchAll(PDO::FETCH_CLASS, "Product")[0];
 	return $result;
+}
+
+function deleteProduct(int $productId) {
+	global $pdo;
+	$query = $pdo->prepare("DELETE FROM products WHERE id = ?");
+	$query->bindParam(1,$productId);
+	$query->execute();
 }
