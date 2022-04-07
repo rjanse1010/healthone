@@ -25,14 +25,17 @@ function validateUser($username, $password) //Als de user correct heeft ingelogd
 
 function registerUser($username, $password) {
     //TODO: Alleen unieke gebruikers registreren!!
-    $hashed = password_hash($password, PASSWORD_DEFAULT);
-    global $pdo;
-    $query = $pdo->prepare("INSERT INTO users (username, password) VALUES (:username, :password)"); //Zet de nieuwe gebruikersnaam en wachtwoord in de database
-    $query->bindParam("username", $username);
-    $query->bindParam("password", $hashed); //gehashte wachtwoord in de database zetten
-    $query->execute();
-    return true;
-    return false; //Stuur false terug als de gebruiker met deze naam al bestond en er dus geen nieuwe user kon worden geregistreerd.
+    $filtered = filter_var($username, FILTER_SANITIZE_STRING); //We verwijderen onnodige tekens zoals html tags uit de username
+    if($filtered == $username) { //Als het filter niks heeft veranderd is de gebruikersnaam goedgekeurd en gaan we door, anders returnen we false.
+        $hashed = password_hash($password, PASSWORD_DEFAULT);
+        global $pdo;
+        $query = $pdo->prepare("INSERT INTO users (username, password) VALUES (:username, :password)"); //Zet de nieuwe gebruikersnaam en wachtwoord in de database
+        $query->bindParam("username", $username);
+        $query->bindParam("password", $hashed); //gehashte wachtwoord in de database zetten
+        $query->execute();
+        return true;
+    }
+    return false; //Stuur ook false terug als de gebruiker met deze naam al bestond en er dus geen nieuwe user kon worden geregistreerd
 }
 
 function getUserById(int $userId) {

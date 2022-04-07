@@ -34,8 +34,16 @@ function getProduct(int $productId)
 }
 
 function deleteProduct(int $productId) {
+    $product_temp = getProduct($productId); //Laad alvast het product in om de afbeelding nog te kunnen verwijderen na het uit de database halen.
+    $path = $_SERVER['DOCUMENT_ROOT'] . "/public/img/categories/" . $product_temp->picture;
 	global $pdo;
 	$query = $pdo->prepare("DELETE FROM products WHERE id = ?");
 	$query->bindParam(1,$productId);
 	$query->execute();
+    echo $path;
+    if(unlink($path)) {
+        //echo ("$product_temp->picture afbeelding verwijderd."); DEBUG
+    } else {
+        echo ("$product_temp->picture afbeelding kon niet worden verwijderd.");
+    }
 }
