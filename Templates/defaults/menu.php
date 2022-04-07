@@ -23,10 +23,10 @@
             <ul class="navbar-nav ms-auto">
                 <?php
                 if(isset($_SESSION["user_id"])) {
-                    echo "<li class='nav-item'><a class='nav-link' href='/member'>member</a></li>";
+                    echo "<li class='nav-item'><a class='nav-link' href='/member'>profiel</a></li>";
                     echo "<li class='nav-item'><a class='nav-link' href='/logout'>uitloggen</a></li>";
                 } else {
-                    echo "<li class='nav-item'><a class='nav-link' href='/login'>registreren</a></li>";
+                    echo "<li class='nav-item'><a class='nav-link' href='/register'>registreren</a></li>";
                     echo "<li class='nav-item'><a class='nav-link' href='/login'>inloggen</a></li>";
                 }
                 ?>

@@ -27,24 +27,11 @@ switch ($params[1]) {
             $categoryId = $_GET['category_id'];
             $products = getProducts($categoryId);
             $name = getCategoryName($categoryId);
-
-            // if (isset($_GET['product_id'])) {
-            //     $productId = $_GET['product_id'];
-            //     $product = getProduct($productId);
-            //     $titleSuffix = ' | ' . $product->name;
-            //     if(isset($_POST['name']) && isset($_POST['review'])) {
-            //         saveReview($_POST['name'],$_POST['review']);
-            //         $reviews=getReviews($productId);
-            //     }
-            //     // TODO Zorg dat je hier de product pagina laat zien
-			// 	include_once "../Templates/product.php";
-            //} else {
 				$titleSuffix = ' | Sportapparaten in categorie ' . $name;
-                // TODO Zorg dat je hier alle producten laat zien van een categorie
+                // Alle producten laten zien van een categorie
 				include_once "../Templates/products.php";
-            //}
         } else {
-            // TODO Toon de categorieen
+            // Toon de categorieen
             $titleSuffix = ' | Sportapparaten';
             $categories = getCategories();
             include_once "../Templates/categories.php";
@@ -56,10 +43,10 @@ switch ($params[1]) {
             $product = getProduct($productId);
             $titleSuffix = ' | ' . $product->name;
             if(isset($_POST['name']) && isset($_POST['review'])) {
-                saveReview($_POST['name'],$_POST['review']);
+                saveReview($_POST['name'],$_POST['review']); //als de gebruiker een review heeft gemaakt, stuur deze naar de database
                 $reviews=getReviews($productId);
             }
-            // TODO Zorg dat je hier de product pagina laat zien
+            // Laat product pagina zien
             include_once "../Templates/product.php";
         } else {
             $titleSuffix = ' | Home';
@@ -113,6 +100,10 @@ switch ($params[1]) {
             $titleSuffix = ' | Adminpaneel';
             include_once "../Templates/admin.php";
         }
+        break;
+    case 'register':
+        $titleSuffix = ' | Registreren';
+        include_once "../Templates/register.php";
         break;
 	case 'login':
 		$titleSuffix = ' | Inloggen';

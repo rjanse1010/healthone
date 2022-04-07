@@ -2,23 +2,37 @@
 
 include_once('../Classes/User.php');
 include_once('Database.php');
-// TODO Zorg dat de methodes goed ingevuld worden met de juiste queries.
-function validateUser($username, $password)
+
+function validateUser($username, $password) //Als de user correct heeft ingelogd, stuur dan de user ID terug, anders stuur je false terug.
 {
 	try {
 		global $pdo;
-		$query = $pdo->prepare("SELECT * FROM users WHERE username = :username AND password = :password");
+		$query = $pdo->prepare("SELECT * FROM users WHERE username = :username");
 		$query->bindParam("username", $username);
-		$query->bindParam("password", $password);
 		$query->execute();
 		$result = $query->fetchAll(PDO::FETCH_CLASS, "User");
-		if(count($result) != 1) {
-			return false;
-		}
-		return $result[0]->id;
+        if($result != null) {
+            $result = $result[0];
+            if (password_verify($password, $result->password)) { //Als het wachtwoord overeen komt met het wachtwoord in de database.
+                return $result->id;
+            }
+        }
+        return false;
 	} catch(Exception $e) {
 		echo $e;
 	}
+}
+
+function registerUser($username, $password) {
+    //TODO: Alleen unieke gebruikers registreren!!
+    $hashed = password_hash($password, PASSWORD_DEFAULT);
+    global $pdo;
+    $query = $pdo->prepare("INSERT INTO users (username, password) VALUES (:username, :password)"); //Zet de nieuwe gebruikersnaam en wachtwoord in de database
+    $query->bindParam("username", $username);
+    $query->bindParam("password", $hashed); //gehashte wachtwoord in de database zetten
+    $query->execute();
+    return true;
+    return false; //Stuur false terug als de gebruiker met deze naam al bestond en er dus geen nieuwe user kon worden geregistreerd.
 }
 
 function getUserById(int $userId) {
@@ -31,19 +45,20 @@ function getUserById(int $userId) {
 }
 
 function userIsLoggedIn() {
-	return isset($_SESSION['user_id']);
+	return isset($_SESSION['user_id']); //Als de sessie user ID bestaat is de user ingelogd, dus dan return je true
 }
 
 function userIsAdmin(int $userId) {
-	return (getUserById($userId)->is_admin)==1?true:false;
+	return (getUserById($userId)->is_admin)==1?true:false; //True als de gebruiker een admin is
 }
 
 function editProfile(int $userId, $newUsername, $newPassword) {
 	try {
+        $hashed = password_hash($newPassword, PASSWORD_DEFAULT);
 		global $pdo;
-		$query = $pdo->prepare("UPDATE users SET username = :username, password = :password WHERE id = :user_id");
+		$query = $pdo->prepare("UPDATE users SET username = :username, password = :password WHERE id = :user_id"); //Zet de nieuwe gebruikersnaam en wachtwoord in de database
 		$query->bindParam("username", $newUsername);
-		$query->bindParam("password", $newPassword);
+		$query->bindParam("password", $hashed);
 		$query->bindParam("user_id", $userId);
 		$query->execute();
 	} catch(Exception $e) {

@@ -19,7 +19,7 @@
             ?>
 
             <h4>Adminpaneel / Sportapparaten</h4>
-            <a href="/admin/products/add" class="btn btn-primary">Sportapparaat toevoegen</a>
+            <a href="/admin/products/add" class="btn btn-primary"><i class="bi bi-file-plus"></i> Sportapparaat toevoegen</a>
             <?php
                 //echo "WIP";
             ?>

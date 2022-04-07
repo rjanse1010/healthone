@@ -11,12 +11,16 @@
             include_once ('defaults/pictures.php');
 
             if(isset($_POST["submit"])) {
-                // if (!filter_input(INPUT_POST, "email", FILTER_VALIDATE_EMAIL)) {
-                $validated = validateUser($_POST["username"], $_POST["password"]);
-                if($validated) {
-                    $_SESSION['user_id'] = $validated;
+                $validatedRegister = registerUser($_POST["username"], $_POST["password"]);
+                if($validatedRegister) { //Als de gebruiker succesvol geregistreerd is, loggen we meteen in
+                    $validatedLogin = validateUser($_POST["username"], $_POST["password"]);
+                    if($validatedLogin) {
+                        $_SESSION['user_id'] = $validatedLogin;
+                    } else {
+                        echo "<span class='text-danger'>Er kon niet worden ingelogd met de gebruikersnaam " . $_POST["username"] . "</span>";
+                    }
                 } else {
-                    echo "<span class='text-danger'>De ingevoerde gebruikersnaam en/of het wachtwoord kloppen niet</span>";
+                    echo "<span class='text-danger'>Er bestaat al een gebruiker met de gebruikersnaam " . $_POST["username"] . "</span>"; //Als de gebruiker al bestaat, error
                 }
                 // }
             }
@@ -28,7 +32,7 @@
             ?>
 			
             <form id="loginform" method="post">
-                <div class="form-head"><h3>Login</h3></div>
+                <div class="form-head"><h3>Registreren</h3></div>
                 <?php 
                 if(isset($_SESSION["errorMessage"])) {
                 ?>
@@ -45,8 +49,10 @@
                     <label for="exampleFormControlInput1" class="form-label">Wachtwoord</label>
                     <input class="form-control" name="password" type="password" id="password" placeholder="Wachtwoord" required></input>
                 </div>
-                <button type="submit" name="submit" class="btn btn-primary">Login</button>
+                <button type="submit" name="submit" class="btn btn-primary">Registreer</button>
             </form>
+
+            <p>TEST</p>
             <?php
             include_once ('defaults/footer.php');
             ?>

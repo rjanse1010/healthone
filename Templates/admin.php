@@ -20,8 +20,7 @@
             <h4>Adminpaneel</h4>
             <p>Kies een pagina om te bewerken of in te zien</p>
             <a href="/admin/products" class="btn btn-primary">Sportapparaten</a>
-            <br><br>
-            <a href="/admin/contact" class="btn btn-primary">Contact</a>
+            <a href="/admin/contact" class="btn btn-primary">Contact (openingstijden)</a>
             <br>
             <hr>
             <?php
