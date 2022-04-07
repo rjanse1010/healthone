@@ -40,10 +40,21 @@ function deleteProduct(int $productId) {
 	$query = $pdo->prepare("DELETE FROM products WHERE id = ?");
 	$query->bindParam(1,$productId);
 	$query->execute();
-    echo $path;
+    //echo $path;
     if(unlink($path)) {
         //echo ("$product_temp->picture afbeelding verwijderd."); DEBUG
     } else {
         echo ("$product_temp->picture afbeelding kon niet worden verwijderd.");
     }
+}
+
+function editProduct(int $productId, int $newCat, string $newName, string $newDesc)
+{
+    global $pdo;
+    $query = $pdo->prepare("UPDATE products SET category_id = :newcat, name = :newname, description = :newdesc WHERE id = :id");
+    $query->bindParam("newcat",$newCat);
+    $query->bindParam("newname",$newName);
+    $query->bindParam("newdesc",$newDesc);
+    $query->bindParam("id",$productId);
+    $query->execute();
 }

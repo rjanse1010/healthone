@@ -21,7 +21,6 @@
             <h4>Adminpaneel / Sportapparaten</h4>
             <a href="/admin/products/add" class="btn btn-primary"><i class="bi bi-file-plus"></i> Sportapparaat toevoegen</a>
             <?php
-                echo "HALLO" . $_SERVER['DOCUMENT_ROOT'] , "/public/img/";
                 //echo "WIP";
             ?>
 
@@ -47,8 +46,8 @@
                         <td><?=$product->name?></td>
                         <td><?=$product->category_id?></td>
                         <td><?=$desc?></td>
-                        <td><a class="text-black" href="products/edit/<?=$product->id?>"><i class="bi bi-pencil-square"></i></a></td>
-                        <td><a class="text-black" href="products/delete/<?=$product->id?>"><i class="bi bi-trash"></i></a></td>
+                        <td><a class="text-black" href="./products/edit/<?=$product->id?>"><i class="bi bi-pencil-square"></i></a></td>
+                        <td><a class="text-black" href="./products/delete/<?=$product->id?>"><i class="bi bi-trash"></i></a></td>
                     </tr>
                 <?php endforeach;?>
             </table>
