@@ -48,6 +48,17 @@ function deleteProduct(int $productId) {
     }
 }
 
+function addProduct(int $newCat, string $newPic, string $newName, string $newDesc)
+{
+    global $pdo;
+    $query = $pdo->prepare("INSERT INTO products (category_id, picture, name, description) VALUES (:newcat, :newpic, :newname, :newdesc)");
+    $query->bindParam("newcat",$newCat);
+    $query->bindParam("newpic",$newPic);
+    $query->bindParam("newname",$newName);
+    $query->bindParam("newdesc",$newDesc);
+    $query->execute();
+}
+
 function editProduct(int $productId, int $newCat, string $newName, string $newDesc)
 {
     global $pdo;

@@ -21,12 +21,9 @@
             <h4>Adminpaneel / Sportapparaten / Toevoegen</h4>
             <?php 
             if(isset($_POST["submit"])):?>
-                <div class="alert alert-success" role="alert">
-                    Product succesvol toegevoegd!
-                </div>
                 <?php
-
-                $target_dir = $_SERVER['DOCUMENT_ROOT'] . "/public/img/categories/";
+                $catName = strtolower(getCategoryName($_POST["category"]));
+                $target_dir = $_SERVER['DOCUMENT_ROOT'] . "/public/img/categories/" . strtolower(getCategoryName($_POST["category"]) . "/");
                 $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
                 $uploadOk = 1;
                 $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
@@ -35,7 +32,7 @@
                 if (isset($_POST["submit"])) {
                     $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
                     if ($check !== false) {
-                        echo "File is an image - " . $check["mime"] . ".";
+                        //echo "File is an image - " . $check["mime"] . ".";
                         $uploadOk = 1;
                     } else {
                         echo "File is not an image.";
@@ -69,19 +66,29 @@
                 } else {
                     if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
                         echo "The file " . htmlspecialchars(basename($_FILES["fileToUpload"]["name"])) . " has been uploaded.";
+                        ?>
+                        <div class="alert alert-success" role="alert">
+                            Product succesvol toegevoegd!
+                        </div>
+                        <?php
+                        addProduct($_POST["category"], strtolower(getCategoryName($_POST["category"])) . "/" . htmlspecialchars(basename($_FILES["fileToUpload"]["name"])), $_POST["name"], $_POST["desc"]);
                     } else {
-                        echo "Sorry, there was an error uploading your file.";
+                        ?>
+                        <div class="alert alert-danger" role="alert">
+                            Product kon niet worden toegevoegd, controleer de afbeelding!
+                        </div>
+                        <?php
                     }
                 }
                 /*saveDay($dayId, $_POST["opening"], $_POST["closing"]);
                 $day = getDay($dayId);*/
             endif; ?>
 
-            <form method="POST" <!--action="upload.php"--> enctype="multipart/form-data">
+            <form method="POST" enctype="multipart/form-data">
                 <div class="mb-3">
-                    <label for="file-upload">Kies afbeelding</label>
+                    <label for="fileToUpload">Kies afbeelding</label>
                     <br>
-                    <input type="file" id="file-upload" name="uploadedfile"></input>
+                    <input type="file" id="fileToUpload" name="fileToUpload"></input>
                 </div>
 
                 <div class="mb-3">
@@ -95,12 +102,12 @@
                 </div>
             
                 <div class="mb-3">
-                    <label for="username" class="form-label">Naam</label>
-                    <input name="username" type="text" class="form-control" id="username" placeholder="" required>
+                    <label for="name" class="form-label">Naam</label>
+                    <input name="name" type="text" class="form-control" id="name" placeholder="" required>
                 </div>
                 <div class="mb-3">
-                    <label for="password" class="form-label">Beschrijving</label>
-                    <textarea class="form-control password" name="password" type="password" id="password" placeholder="" required></textarea>
+                    <label for="desc" class="form-label">Beschrijving</label>
+                    <textarea class="form-control" name="desc" id="desc" placeholder="" required></textarea>
                 </div>
                 <button type="submit" name="submit" class="btn btn-primary">Toevoegen</button>
                 <a href="/admin/products" class="btn btn-primary">Annuleren</a>

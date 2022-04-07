@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Gegenereerd op: 07 mrt 2022 om 23:11
+-- Gegenereerd op: 07 apr 2022 om 14:23
 -- Serverversie: 10.4.21-MariaDB
 -- PHP-versie: 8.0.11
 
@@ -88,7 +88,7 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `name`, `category_id`, `picture`, `description`) VALUES
-(1, 'VirtuFit Row 450', 1, 'roeitrainer/ro1.jpg', 'De VirtuFit Row 450 Roeitrainer is de ideale roeitrainer om thuis mee te sporten zonder dat de rest van het gezin of de onderburen er iets van hoort. Dit komt doordat de roeitrainer beschikt over een “silent magnetic” weerstandssysteem waarbij het ook nog eens eenvoudig is om te schakelen tussen de 10 verschillende weerstanden. En niet alleen de overgang tussen de weerstanden is stil, ook de beweging over de extra brede rails is geluidloos. Dit komt doordat de zitting van PU wielen is voorzien. Deze wielen zorgen er ook voor dat het apparaat steviger en soepeler is dan verglijkbare roeiapparaten.'),
+(1, 'VirtuFit Row 450', 1, 'roeitrainer/ro1.jpg', 'De VirtuFit Row 450 Roeitrainer is de ideale roeitrainer om thuis mee te sporten zonder dat de rest van het gezin of de onderburen er iets van hoort. Dit komt doordat de roeitrainer beschikt over een “silent magnetic” weerstandssysteem waarbij het ook nog eens eenvoudig is om te schakelen tussen de 10 verschillende weerstanden. En niet alleen de overgang tussen de weerstanden is stil, ook de beweging over de extra brede rails is geluidloos. Dit komt doordat de zitting van PU wielen is voorzien. Deze wielen zorgen er ook voor dat het apparaat steviger en soepeler is dan vergelijkbare roeiapparaten.'),
 (2, 'VirtuFit Row 900', 1, 'roeitrainer/ro2.jpg', 'Met de VirtuFit Foldable Water Resistance Row 900 Roeitrainer kun je binnen dezelfde roeiervaring krijgen als buiten op het water. De Row 900 reageert op je roeislagen alsof je buiten in een roeiboot over het water vaart. Dit komt door de waterweerstand. Het rad dat door de watertank draait geeft je dezelfde tegenkracht als een roeispaan die door het water beweegt. Water werkt namelijk progressief; hoe sneller je gaat hoe meer weerstand het oplevert. Dit is heel anders dan bij een roeitrainer met een magnetische weerstand of lucht weerstand. Water weerstand geeft je veel controle over de intensiteit van je oefening. Je moet sneller roeien als je een hogere intensiteit wilt ervaren. Roeien op hoge intensiteit is een oefening waarbij je veel kracht gebruikt en spieren in je hele lichaam traint.'),
 (5, 'Crossdinges', 2, 'crosstrainer/cr1.jpg', 'Mooie crosstrainert'),
 (6, 'Crosstrainer 2', 2, 'crosstrainer/cr2.jpg', 'Deze is niet zo fraai, maar wel sterk.'),
@@ -126,14 +126,6 @@ CREATE TABLE `users` (
   `is_admin` tinyint(1) NOT NULL DEFAULT 0 COMMENT 'Is de gebruiker administrator',
   `password` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Gegevens worden geëxporteerd voor tabel `users`
---
-
-INSERT INTO `users` (`id`, `username`, `is_admin`, `password`) VALUES
-(1, 'testuser', 0, 'test'),
-(2, 'testadmin', 1, 'test');
 
 --
 -- Indexen voor geëxporteerde tabellen
@@ -186,19 +178,19 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT voor een tabel `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=117;
 
 --
 -- AUTO_INCREMENT voor een tabel `reviews`
 --
 ALTER TABLE `reviews`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=137;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=149;
 
 --
 -- AUTO_INCREMENT voor een tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Beperkingen voor geëxporteerde tabellen
